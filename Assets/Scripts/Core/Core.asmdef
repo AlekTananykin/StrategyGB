@@ -1,0 +1,16 @@
+{
+    "name": "Core",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a01b931173d94034a8f6d2a7a5a2069e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

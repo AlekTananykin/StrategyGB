@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class MainBuilding : MonoBehaviour
+public class MainBuilding : MonoBehaviour, IUnitProducer
 {
     [SerializeField] GameObject _unitPrefab;
     [SerializeField] Transform _unitsParent;

@@ -19,7 +19,7 @@ public class MouseInteractionsHandler : MonoBehaviour
             return;
 
         var mainBuilding = hits.Select(
-            hits => hits.collider.GetComponentInParent<MainBuilding>())
+            hits => hits.collider.GetComponentInParent<IUnitProducer>())
             .Where(c=>null != c).FirstOrDefault();
 
         if (default == mainBuilding)
