@@ -5,13 +5,12 @@ using UnityEngine;
 public class MouseInteractionsHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private SelectableValue _selectedObject;
 
     private Collider _selectedObjectCollider;
     
     void Update()
     {
-        ToOutLine();
-
         if (!Input.GetMouseButtonUp(0))
             return;
 
@@ -20,36 +19,36 @@ public class MouseInteractionsHandler : MonoBehaviour
         if (0 == hits.Length)
             return;
 
-        var mainBuilding = hits.Select(
-            hits => hits.collider.GetComponentInParent<IUnitProducer>())
+        var selectable = hits.Select(
+            hits => hits.collider.GetComponentInParent<ISelectable>())
             .Where(c=>null != c).FirstOrDefault();
 
-        if (default == mainBuilding)
+        if (default == selectable)
             return;
 
-        mainBuilding.ProduceUnit();
+        _selectedObject.SetValue(selectable);
     }
 
-    void ToOutLine()
+    void Outline(ISelectable mainBuilding)
     {
-        if (!Physics.Raycast(
-            _camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
-            return;
-
-        if (null != _selectedObjectCollider)
-        {
-            var prevObjectOutline = _selectedObjectCollider.GetComponent<Outline>();
-            if (null != prevObjectOutline)
-            {
-                prevObjectOutline.enabled = false;
-            }
-        }
-
-        var outlineComponent = hit.collider.GetComponent<Outline>();
+        var selectedNewCollider = 
+            (mainBuilding as Component).gameObject.GetComponent<Collider>();
+        var outlineComponent = selectedNewCollider?.gameObject.GetComponent<IOutlinable>();
         if (null == outlineComponent)
             return;
 
-        _selectedObjectCollider = hit.collider;
-        outlineComponent.enabled = true;
+        if (selectedNewCollider == _selectedObjectCollider)
+        {
+            if (null != outlineComponent)
+                outlineComponent.IsOutlined = false;
+
+            _selectedObjectCollider = null;
+
+            return;
+        }
+        _selectedObjectCollider = selectedNewCollider;
+        if (null != outlineComponent)
+            outlineComponent.IsOutlined = true;
     }
+
 }

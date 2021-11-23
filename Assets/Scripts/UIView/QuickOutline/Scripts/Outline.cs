@@ -13,7 +13,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 
-public class Outline : MonoBehaviour {
+public class Outline : MonoBehaviour, IOutlinable {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
   public enum Mode {
@@ -48,7 +48,13 @@ public class Outline : MonoBehaviour {
     }
   }
 
-  [Serializable]
+    public bool IsOutlined 
+    { 
+        get => this.enabled; 
+        set => this.enabled = value; 
+    }
+
+    [Serializable]
   private class ListVector3 {
     public List<Vector3> data;
   }
