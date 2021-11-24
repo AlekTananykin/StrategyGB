@@ -30,6 +30,8 @@ public class CommandButtonsView : MonoBehaviour
         .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
         _buttonsByExecutorType
         .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
+
+        Clear();
     }
 
     public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)

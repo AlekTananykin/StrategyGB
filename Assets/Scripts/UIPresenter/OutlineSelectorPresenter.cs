@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OutlineSelectorPresenter : MonoBehaviour
@@ -14,7 +11,6 @@ public class OutlineSelectorPresenter : MonoBehaviour
     {
         _selectable.OnSelected += OnSelected;
         OnSelected(_selectable.CurrentValue);
-        
     }
 
     private void OnSelected(ISelectable selectable)
@@ -25,7 +21,6 @@ public class OutlineSelectorPresenter : MonoBehaviour
         _currentSelectable = selectable;
 
         Outline(selectable);
-
     }
 
 

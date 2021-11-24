@@ -28,27 +28,4 @@ public class MouseInteractionsHandler : MonoBehaviour
 
         _selectedObject.SetValue(selectable);
     }
-
-    void Outline(ISelectable mainBuilding)
-    {
-        var selectedNewCollider = 
-            (mainBuilding as Component).gameObject.GetComponent<Collider>();
-        var outlineComponent = selectedNewCollider?.gameObject.GetComponent<IOutlinable>();
-        if (null == outlineComponent)
-            return;
-
-        if (selectedNewCollider == _selectedObjectCollider)
-        {
-            if (null != outlineComponent)
-                outlineComponent.IsOutlined = false;
-
-            _selectedObjectCollider = null;
-
-            return;
-        }
-        _selectedObjectCollider = selectedNewCollider;
-        if (null != outlineComponent)
-            outlineComponent.IsOutlined = true;
-    }
-
 }
