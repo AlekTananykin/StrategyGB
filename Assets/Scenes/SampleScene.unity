@@ -337,7 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectable: {fileID: 11400000, guid: a094755bc9b820c4aac6e0f2b8c66b39, type: 2}
-  _context: {fileID: 11400000, guid: 2f5785438d24e5f4594a8715b250f149, type: 2}
   _view: {fileID: 2040674809}
 --- !u!1 &170184072
 GameObject:
@@ -1181,6 +1180,7 @@ GameObject:
   - component: {fileID: 322746792}
   - component: {fileID: 322746791}
   - component: {fileID: 322746790}
+  - component: {fileID: 322746794}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1270,6 +1270,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &322746794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322746789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fb94eae9399394f8a172a031d82ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _legacyContext: {fileID: 11400000, guid: 2f5785438d24e5f4594a8715b250f149, type: 2}
 --- !u!1 &400976689
 GameObject:
   m_ObjectHideFlags: 0
