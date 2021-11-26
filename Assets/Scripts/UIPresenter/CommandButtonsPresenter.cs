@@ -1,71 +1,37 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class CommandButtonsPresenter : MonoBehaviour
 {
     [SerializeField]private SelectableValue _selectable;
-    [SerializeField] private AssetsContext _context;
 
     [SerializeField] private CommandButtonsView _view;
+    [Inject] private CommandButtonsModel _model;
+
     private ISelectable _currentSelectable;
 
     void Start()
     {
-        _selectable.OnSelected += OnSelected;
-        OnSelected(_selectable.CurrentValue);
-        _view.OnClick += onButtonClick;
+        _selectable.OnSelected += onSelected;
+        onSelected(_selectable.CurrentValue);
+
+        _view.OnClick += _model.OnCommandButtonClicked;
+
+        _model.OnCommandSent += _view.UnblockAllInteractions;
+        _model.OnCommandCancel += _view.UnblockAllInteractions;
+        _model.OnCommandAccepted += _view.BlockInteractions;
     }
 
-    private void onButtonClick(ICommandExecutor executor)
-    {
-        var unitProducer = executor as 
-            CommandExecutorBase<IProduceUnitCommand>;
-        if (null != unitProducer)
-        {
-            unitProducer.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
-            return;
-        }
 
-        var attack = executor as
-            CommandExecutorBase<IAttackCommand>;
-        if (null != attack)
-        {
-            attack.ExecuteSpecificCommand(_context.Inject(new AttackCommand()));
-            return;
-        }
-
-        var stop = executor as
-            CommandExecutorBase<IStopCommand>;
-        if (null != stop)
-        {
-            stop.ExecuteSpecificCommand(_context.Inject(new StopCommand()));
-            return;
-        }
-
-        var move = executor as
-            CommandExecutorBase<IMoveCommand>;
-        if (null != move)
-        {
-            move.ExecuteSpecificCommand(_context.Inject(new MoveCommand()));
-            return;
-        }
-
-        var patrol = executor as
-            CommandExecutorBase<IPatrolCommand>;
-        if (null != patrol)
-        {
-            patrol.ExecuteSpecificCommand(_context.Inject(new PatrolCommand()));
-            return;
-        }
-
-        throw new ApplicationException("unknown command!");
-    }
-
-    private void OnSelected(ISelectable selectable)
+    private void onSelected(ISelectable selectable)
     {
         if (_currentSelectable == selectable)
             return;
+
+        if (null != _currentSelectable)
+            _model.OnSelectionChanged();
 
         _currentSelectable = selectable;
         _view.Clear();
@@ -75,7 +41,11 @@ public class CommandButtonsPresenter : MonoBehaviour
             var commandExecutors = new List<ICommandExecutor>();
             Component selectedComponent = (selectable as Component);
 
-            commandExecutors.AddRange(selectedComponent.gameObject.GetComponentsInParent<ICommandExecutor>());
+            if (null == selectedComponent)
+                throw new NullReferenceException("selectable is not Component");
+
+            commandExecutors.AddRange(
+                selectedComponent.gameObject.GetComponentsInParent<ICommandExecutor>());
             _view.MakeLayout(commandExecutors);
         }
     }
