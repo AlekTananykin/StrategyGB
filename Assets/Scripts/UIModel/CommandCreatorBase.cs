@@ -7,7 +7,7 @@ public abstract class CommandCreatorBase<T> where T: ICommand
         ICommandExecutor commandExecutor, Action<T> callback)
     {
         var specificExecutor = commandExecutor as CommandExecutorBase<T>;
-        if (null == specificExecutor)
+        if (null != specificExecutor)
             specificCommandCreation(callback);
 
         return commandExecutor;

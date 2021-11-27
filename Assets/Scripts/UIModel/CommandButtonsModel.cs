@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class CommandButtonsModel : MonoBehaviour
+public class CommandButtonsModel
 {
     public event Action<ICommandExecutor> OnCommandAccepted;
     public event Action OnCommandSent;

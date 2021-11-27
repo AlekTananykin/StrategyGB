@@ -7,7 +7,7 @@ public class UiModelInstaller: MonoInstaller
 
     public override void InstallBindings()
     {
-        base.InstallBindings();
+        //base.InstallBindings();
         Container.Bind<AssetsContext>().FromInstance(_legacyContext);
 
         Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
