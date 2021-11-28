@@ -14,7 +14,7 @@ public class CommandButtonsPresenter : MonoBehaviour
 
     void Start()
     {
-        _selectable.OnSelected += onSelected;
+        _selectable.OnNewValue += onSelected;
         onSelected(_selectable.CurrentValue);
 
         _view.OnClick += _model.OnCommandButtonClicked;

@@ -9,7 +9,7 @@ public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
     [Inject]
     private void Init(AttackableValue attackClicks)
     {
-        attackClicks.OnSelected += onSelected;
+        attackClicks.OnNewValue += onSelected;
     }
 
     private void onSelected(IAttackable attackable)
