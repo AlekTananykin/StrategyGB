@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = nameof(Vector3Value), menuName ="Game/" + nameof(Vector3Value))]
-public class Vector3Value : ScriptableObject
+public class ActionValue : ScriptableObject
 {
     public Vector3 CurrentValue { get; set; }
     public Action<Vector3> OnNewValue;

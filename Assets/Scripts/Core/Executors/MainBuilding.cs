@@ -1,12 +1,14 @@
 
 using UnityEngine;
 
-public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
+public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
 {
     public float Health => _health;
     public float MaxHealth => _maxHealth;
 
     public Sprite Icon => _icon;
+
+    public Transform PivotPoint => transform;
 
     [SerializeField] 
     Transform _unitsParent;

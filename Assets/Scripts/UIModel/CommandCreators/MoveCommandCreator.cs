@@ -12,7 +12,6 @@ public class MoveCommandCreator : CommandCreatorBase<IMoveCommand>
     private void Init(Vector3Value groundClicks)
     {
         groundClicks.OnNewValue += onNewValue;
-        
     }
 
     private void onNewValue(Vector3 groundClick)

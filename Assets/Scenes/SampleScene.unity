@@ -1245,7 +1245,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1283,7 +1283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _legacyContext: {fileID: 11400000, guid: 2f5785438d24e5f4594a8715b250f149, type: 2}
-  _vector3Value: {fileID: 11400000, guid: beb06640722ad4847907f74575f2124e, type: 2}
+  _vector3Value: {fileID: 11400000, guid: 087ed7067b9e40543a4e80ae2506fa5c, type: 2}
+  _attackableValue: {fileID: 11400000, guid: e56e97441409a4044aaa087324999fee, type: 2}
+  _selectable: {fileID: 11400000, guid: a094755bc9b820c4aac6e0f2b8c66b39, type: 2}
 --- !u!1 &356657197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4782,8 +4784,9 @@ MonoBehaviour:
   _eventSystem: {fileID: 1816344571}
   _camera: {fileID: 963194227}
   _selectedObject: {fileID: 11400000, guid: a094755bc9b820c4aac6e0f2b8c66b39, type: 2}
-  _groundClickRMB: {fileID: 11400000, guid: beb06640722ad4847907f74575f2124e, type: 2}
-  _groundTRransform: {fileID: 949092880}
+  _groundClickRMB: {fileID: 11400000, guid: 087ed7067b9e40543a4e80ae2506fa5c, type: 2}
+  _attackablesRBM: {fileID: 11400000, guid: e56e97441409a4044aaa087324999fee, type: 2}
+  _groundTransform: {fileID: 949092880}
 --- !u!4 &1200265525
 Transform:
   m_ObjectHideFlags: 0
