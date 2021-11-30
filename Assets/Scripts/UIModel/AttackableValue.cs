@@ -1,4 +1,4 @@
-using System;
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(AttackableValue), menuName = "Game/" +
