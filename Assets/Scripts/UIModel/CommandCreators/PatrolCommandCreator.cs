@@ -1,38 +1,10 @@
-using System;
 using UnityEngine;
 using Zenject;
 
-public class PatrolCommandCreator : CommandCreatorBase<IPatrolCommand>
+public class PatrolCommandCreator : CancellableCommandCreatorBase<IPatrolCommand, Vector3>
 {
-    [Inject] AssetsContext _context;
-    [Inject] SelectableValue _selectable;
+    [Inject] private SelectableValue _selectable;
 
-    private Action<IPatrolCommand> _creationCollback;
-
-    [Inject]
-    private void Init(Vector3Value groundClicks)
-    {
-        groundClicks.OnNewValue += onNewValue;
-    }
-
-    private void onNewValue(Vector3 groundClick)
-    {
-        _creationCollback?.Invoke(
-            _context.Inject(
-                new PatrolCommand(_selectable.CurrentValue.PivotPoint.position,
-                groundClick)));
-
-        _creationCollback = null;
-    }
-
-    protected override void specificCommandCreation(Action<IPatrolCommand> callback)
-    {
-        _creationCollback = callback;
-    }
-
-    public override void ProcessCancel()
-    {
-        base.ProcessCancel();
-        _creationCollback = null;
-    }
+    protected override IPatrolCommand createCommand(Vector3 argument) =>
+        new PatrolCommand(_selectable.CurrentValue.PivotPoint.position, argument);
 }

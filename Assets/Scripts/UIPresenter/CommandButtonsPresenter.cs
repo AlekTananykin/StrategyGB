@@ -8,7 +8,8 @@ public class CommandButtonsPresenter : MonoBehaviour
     [SerializeField]private SelectableValue _selectable;
 
     [SerializeField] private CommandButtonsView _view;
-    [Inject] private CommandButtonsModel _model;
+    [Inject] 
+    private CommandButtonsModel _model;
 
     private ISelectable _currentSelectable;
 
