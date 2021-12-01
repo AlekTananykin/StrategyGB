@@ -14,7 +14,7 @@ public static class AsyncExtensions
                 cancelTask))
         {
             var any = await Task.WhenAny(originalTask, cancelTask.Task);
-            if (null == any)
+            if (cancelTask.Task == any)
                 ct.ThrowIfCancellationRequested();
         }
 

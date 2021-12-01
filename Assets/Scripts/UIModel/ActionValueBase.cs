@@ -3,14 +3,10 @@ using UnityEngine;
 
 public class ActionValueBase<T> : ScriptableObject, IAwaitable<T>
 {
-    public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>
+    public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
     {
         private readonly ActionValueBase<TAwaited> 
             _scriptableObjectValueBase;
-
-        private TAwaited _result;
-        private Action _continuation;
-        private bool _isCompleted;
 
         public NewValueNotifier(
             ActionValueBase<TAwaited> scriptableObjectValueBase)
@@ -19,29 +15,11 @@ public class ActionValueBase<T> : ScriptableObject, IAwaitable<T>
             _scriptableObjectValueBase.OnNewValue += onNewValue;
         }
 
-        private void onNewValue(TAwaited obj)
+        private void onNewValue(TAwaited result)
         {
             _scriptableObjectValueBase.OnNewValue -= onNewValue;
-            _result = obj;
-            _isCompleted = true;
-            _continuation?.Invoke();
+            onWaitFinish(result);
         }
-
-        public void OnCompleted(Action continuation)
-        {
-            if (_isCompleted)
-            {
-                continuation?.Invoke();
-            }
-            else 
-            {
-                _continuation = continuation;
-            }
-        }
-
-        public bool IsCompleted => _isCompleted;
-
-        public TAwaited GetResult() => _result;
     }
 
     public T CurrentValue { get; private set; }
