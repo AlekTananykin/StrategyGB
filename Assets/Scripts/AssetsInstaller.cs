@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 [CreateAssetMenu(fileName = "AssetsInstaller", menuName = "Game/Installers/AssetsInstaller")]
 public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
@@ -13,12 +15,6 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
     {
         Container.BindInstances(_legacyContext, _groundClicksRMB,
             _attackableClicksRMB, _selectables);
-
-        //Container.Bind<AssetsContext>().FromInstance(_legacyContext);
-        //Container.Bind<Vector3Value>().FromInstance(_groundClicksRMB);
-        //Container.Bind<AttackableValue>().FromInstance(_attackableClicksRMB);
-        //Container.Bind<SelectableValue>().FromInstance(_selectables);
-
 
         Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
             .To<ProduceUnitCommandCreator>().AsTransient();
@@ -42,5 +38,8 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
             .FromInstance(_attackableClicksRMB);
         Container.Bind<IAwaitable<Vector3>>()
             .FromInstance(_groundClicksRMB);
+
+        Container.Bind<IObservable<ISelectable>>()
+            .FromInstance(_selectables);
     }
 }

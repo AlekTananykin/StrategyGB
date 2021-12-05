@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 
-public class StatefullActionValueBase<T> : ScriptableObject, IAwaitable<T>
+public class ActionValueBase<T> : ScriptableObject, IAwaitable<T>
 {
     public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
     {
-        private readonly StatefullActionValueBase<TAwaited> 
+        private readonly ActionValueBase<TAwaited> 
             _scriptableObjectValueBase;
 
         public NewValueNotifier(
-            StatefullActionValueBase<TAwaited> scriptableObjectValueBase)
+            ActionValueBase<TAwaited> scriptableObjectValueBase)
         {
             _scriptableObjectValueBase = scriptableObjectValueBase;
             _scriptableObjectValueBase.OnNewValue += onNewValue;

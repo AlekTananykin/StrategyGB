@@ -2,8 +2,8 @@
 using System;
 using UniRx;
 
-public class StatefulActionValueBase<T> :
-    StatefullActionValueBase<T>, IObservable<T>
+public class StatefullActionValueBase<T> :
+    ActionValueBase<T>, IObservable<T>
 {
     private ReactiveProperty<T> _innerDataSource = 
         new ReactiveProperty<T>();

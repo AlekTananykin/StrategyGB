@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 public class CommandButtonsPresenter : MonoBehaviour
 {
-    [SerializeField]private SelectableValue _selectable;
+    [Inject]
+    private IObservable<ISelectable> _selectedValues;
 
     [SerializeField] private CommandButtonsView _view;
     [Inject] 
@@ -15,9 +17,8 @@ public class CommandButtonsPresenter : MonoBehaviour
 
     void Start()
     {
-        _selectable.OnNewValue += onSelected;
-        onSelected(_selectable.CurrentValue);
-
+        _selectedValues.Subscribe(onSelected);
+        
         _view.OnClick += _model.OnCommandButtonClicked;
 
         _model.OnCommandSent += _view.UnblockAllInteractions;
