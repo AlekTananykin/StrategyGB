@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 
-public class ActionValueBase<T> : ScriptableObject, IAwaitable<T>
+public class StatefullActionValueBase<T> : ScriptableObject, IAwaitable<T>
 {
     public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
     {
-        private readonly ActionValueBase<TAwaited> 
+        private readonly StatefullActionValueBase<TAwaited> 
             _scriptableObjectValueBase;
 
         public NewValueNotifier(
-            ActionValueBase<TAwaited> scriptableObjectValueBase)
+            StatefullActionValueBase<TAwaited> scriptableObjectValueBase)
         {
             _scriptableObjectValueBase = scriptableObjectValueBase;
             _scriptableObjectValueBase.OnNewValue += onNewValue;
@@ -24,7 +24,7 @@ public class ActionValueBase<T> : ScriptableObject, IAwaitable<T>
 
     public T CurrentValue { get; private set; }
     public Action<T> OnNewValue;
-    public void SetValue(T value)
+    public virtual void SetValue(T value)
     {
         CurrentValue = value;
         OnNewValue?.Invoke(value);
