@@ -22,7 +22,8 @@ public class CommandButtonsModel
 
     private bool _commandIsPending;
 
-    public void OnCommandButtonClicked(ICommandExecutor commandExecutor)
+    public void OnCommandButtonClicked(ICommandExecutor commandExecutor,
+        ICommandQueue commandsQueue)
     {
         if (_commandIsPending)
             processOnCancel();
@@ -32,22 +33,26 @@ public class CommandButtonsModel
         OnCommandAccepted?.Invoke(commandExecutor);
 
         _unitProduce.ProcessCommandExecutor(commandExecutor, 
-            command=> executeCommandWrapper(commandExecutor, command));
+            command=> executeCommandWrapper(command, commandsQueue));
 
         _attack.ProcessCommandExecutor(commandExecutor,
-            command => executeCommandWrapper(commandExecutor, command));
+            command => executeCommandWrapper(command, commandsQueue));
 
         _stop.ProcessCommandExecutor(commandExecutor,
-            command => executeCommandWrapper(commandExecutor, command));
+            command => executeCommandWrapper(command, commandsQueue));
         _move.ProcessCommandExecutor(commandExecutor,
-            command => executeCommandWrapper(commandExecutor, command));
+            command => executeCommandWrapper(command, commandsQueue));
         _patrol.ProcessCommandExecutor(commandExecutor,
-            command => executeCommandWrapper(commandExecutor, command));
+            command => executeCommandWrapper(command, commandsQueue));
     }
 
-    private void executeCommandWrapper(ICommandExecutor commandExecutor, ICommand command)
+    private void executeCommandWrapper(object command, ICommandQueue commandsQueue)
     {
-        commandExecutor.ExecuteCommand(command);
+        if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
+        {
+            commandsQueue.Clear();
+        }
+        commandsQueue.EnqueueCommand(command);
         _commandIsPending = false;
         OnCommandSent?.Invoke();
     }

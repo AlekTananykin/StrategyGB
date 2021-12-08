@@ -1,5 +1,7 @@
 
+using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
 {
@@ -18,11 +20,18 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
     private float _maxHealth = 1000;
     [SerializeField] private Sprite _icon;
 
-    public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+    [Inject]
+    DiContainer _diContainer;
+
+    public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
     {
         Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
             Random.Range(-10, 10)),
             Quaternion.identity, _unitsParent);
+
+        //_diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        //    Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
+
     }
 
 }

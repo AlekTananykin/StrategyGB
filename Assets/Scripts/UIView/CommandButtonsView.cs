@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CommandButtonsView : MonoBehaviour
 {
-    public Action<ICommandExecutor> OnClick;
+    public Action<ICommandExecutor, ICommandQueue> OnClick;
 
     [SerializeField] private GameObject _attackButton;
     [SerializeField] private GameObject _moveButton;
@@ -61,7 +61,7 @@ public class CommandButtonsView : MonoBehaviour
         Clear();
     }
 
-    public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)
+    public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors, ICommandQueue queue)
     {
         foreach (var currentExecutor in commandExecutors)
         { 
@@ -70,7 +70,7 @@ public class CommandButtonsView : MonoBehaviour
 
             buttonGameObject.SetActive(true);
             var button = buttonGameObject.GetComponent<Button>();
-            button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor));
+            button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor, queue));
         }
     }
 
