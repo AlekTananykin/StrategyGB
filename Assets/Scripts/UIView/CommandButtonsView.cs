@@ -14,6 +14,7 @@ public class CommandButtonsView : MonoBehaviour
     [SerializeField] private GameObject _patrolButton;
     [SerializeField] private GameObject _stopButton;
     [SerializeField] private GameObject _produceUnitButton;
+    [SerializeField] private GameObject _setRellyButton;
 
     private Dictionary<Type, GameObject> _buttonsByExecutorType;
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-
+using UniRx;
 public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
 {
     public float Health => _health;
@@ -25,13 +25,22 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
 
     public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
     {
-        Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
-            Random.Range(-10, 10)),
-            Quaternion.identity, _unitsParent);
+        //Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        //    Random.Range(-10, 10)),
+        //    Quaternion.identity, _unitsParent);
 
-        //_diContainer.InstantiatePrefab(innerTask.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        //_diContainer.InstantiatePrefab(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
         //    Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
 
+        var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position,
+        Quaternion.identity, _unitsParent);
+        var queue = instance.GetComponent<ICommandQueue>();
+        var mainBuilding = GetComponent<MainBuilding>();
+        queue.EnqueueCommand(new MoveCommand(mainBuilding.RallyPoint));
+
+
     }
+
+    public Vector3 RallyPoint;
 
 }

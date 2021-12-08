@@ -14,4 +14,6 @@ public class MainBuildingCommandQueue : MonoBehaviour, ICommandQueue
     {
         await _produceUnitCommandExecutor.TryExecuteCommand(command);
     }
+
+    public Vector3 RallyPoint { get; set; }
 }
