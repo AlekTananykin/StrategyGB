@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainUnit : MonoBehaviour, ISelectable, IAttackable
+public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit
 {
     [SerializeField]private float _health = 100;
     [SerializeField]private float _maxHealth = 100;
