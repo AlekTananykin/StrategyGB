@@ -34,11 +34,25 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
 
         var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position + new Vector3(2,0,2),
         Quaternion.identity, _unitsParent);
+        int factionId = GetComponent<FactionMember>().FactionId;
+        instance.GetComponent<FactionMember>().SetFaction(factionId);
+
         var queue = instance.GetComponent<ICommandQueue>();
         var mainBuilding = GetComponent<MainBuilding>();
         queue.EnqueueCommand(new MoveCommand(mainBuilding.RallyPoint));
 
 
+    }
+
+    public void ReceiveDamage(int amount)
+    {
+        if (_health <= 0.0)
+            return;
+
+        _health -= amount;
+
+        if (_health <= 0)
+            Destroy(gameObject);
     }
 
     public Vector3 RallyPoint;
