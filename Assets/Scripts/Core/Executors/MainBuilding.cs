@@ -25,14 +25,14 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
 
     public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
     {
-        //Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
-        //    Random.Range(-10, 10)),
-        //    Quaternion.identity, _unitsParent);
+        //instantiate(command.unitprefab, new vector3(random.range(-10, 10), 0,
+        //    random.range(-10, 10)),
+        //    quaternion.identity, _unitsparent);
 
-        //_diContainer.InstantiatePrefab(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        //var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
         //    Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
 
-        var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position,
+        var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position + new Vector3(2,0,2),
         Quaternion.identity, _unitsParent);
         var queue = instance.GetComponent<ICommandQueue>();
         var mainBuilding = GetComponent<MainBuilding>();

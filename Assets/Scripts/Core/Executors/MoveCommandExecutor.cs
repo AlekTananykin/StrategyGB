@@ -11,7 +11,8 @@ public class MoveCommandExecutor : CommandExecutorBase<IMoveCommand>
 
     public override async Task ExecuteSpecificCommand(IMoveCommand command)
     {
-        GetComponent<NavMeshAgent>().destination = command.Target;
+        var nav = GetComponent<NavMeshAgent>();
+        nav.destination = command.Target;
         _animator.SetTrigger("Walk");
         //_animator.SetTrigger(Animator.StringToHash(AnimationTypes.Walk));
 
