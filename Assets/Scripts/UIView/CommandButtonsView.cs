@@ -43,6 +43,7 @@ public class CommandButtonsView : MonoBehaviour
         _patrolButton.GetComponent<Selectable>().interactable = value;
         _stopButton.GetComponent<Selectable>().interactable = value;
         _produceUnitButton.GetComponent<Selectable>().interactable = value;
+        _setRellyButton.GetComponent<Selectable>().interactable = value;
     }
 
     private void Start()
@@ -58,7 +59,8 @@ public class CommandButtonsView : MonoBehaviour
         .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
         _buttonsByExecutorType
         .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
-
+        _buttonsByExecutorType
+         .Add(typeof(CommandExecutorBase<ISetRallyPointCommand>), _setRellyButton);
         Clear();
     }
 
