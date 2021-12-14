@@ -53,7 +53,7 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,
         {
             return;
         }
-        _health -= amount;
+        _health += amount;
 
         if (_health <= 0)
         {

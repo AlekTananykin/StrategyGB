@@ -11,9 +11,7 @@ public class GameOverScreenPresenter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private GameObject _view;
 
-    [Inject]
-
-    private void Init()
+    [Inject] private void Init()
     {
         _gameStatus.Status.ObserveOnMainThread().Subscribe(result =>
         {
