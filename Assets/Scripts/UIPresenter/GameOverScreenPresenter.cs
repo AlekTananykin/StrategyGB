@@ -15,14 +15,14 @@ public class GameOverScreenPresenter : MonoBehaviour
     {
         _gameStatus.Status.ObserveOnMainThread().Subscribe(result =>
         {
-            var message = new StringBuilder("$Game Over!");
+            var message = new StringBuilder("Game Over!");
             if (0 == result)
             {
                 message.AppendLine("Ничья");
             }
             else
             {
-                message.AppendLine();
+                message.AppendLine($"The winner is fraction number {FactionMember.GetWinner()}");
             }
             _view.SetActive(true);
             _text.text = message.ToString();
