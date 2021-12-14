@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class FactionMember : MonoBehaviour
+public class FactionMember : MonoBehaviour, IFactionMember
 {
 
     private static Dictionary<int, List<int>> _memberCount =
