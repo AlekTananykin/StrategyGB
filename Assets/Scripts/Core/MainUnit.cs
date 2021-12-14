@@ -26,7 +26,7 @@ public class MainUnit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageD
             return;
         }
         
-        _health -= amount;
+        _health += amount;
         if (_health <= 0)
         {
             //_animator.SetTrigger("PlayDead");

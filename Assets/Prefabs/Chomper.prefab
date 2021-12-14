@@ -69,8 +69,8 @@ MonoBehaviour:
   _health: 100
   _maxHealth: 100
   _icon: {fileID: 0}
-  _animator: {fileID: 0}
-  _stopCommand: {fileID: 0}
+  _animator: {fileID: 1653789873108784183}
+  _stopCommand: {fileID: 7535682347757156054}
   _damage: -25
 --- !u!114 &1214080015202111759
 MonoBehaviour:
@@ -84,8 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00efcdd13f9f854eaa60738c9ef6314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
-  _stopCommandExecutor: {fileID: 0}
+  _animator: {fileID: 1653789873108784183}
+  _stopCommandExecutor: {fileID: 7535682347757156054}
 --- !u!195 &2031177670109696822
 NavMeshAgent:
   m_ObjectHideFlags: 0
