@@ -30,6 +30,10 @@ public class FactionMember : MonoBehaviour
     public int FactionId => _factionId;
     [SerializeField] private int _factionId;
 
+    public FactionMember()
+    {
+    }
+
     private void Awake()
     {
         if (0 != _factionId)

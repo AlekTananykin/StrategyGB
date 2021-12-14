@@ -16,21 +16,6 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
         Container.BindInstances(_legacyContext, _groundClicksRMB,
             _attackableClicksRMB, _selectables);
 
-        //Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
-        //    .To<ProduceUnitCommandCreator>().AsTransient();
-        
-        //Container.Bind<CommandCreatorBase<IAttackCommand>>()
-        //    .To<AttackCommandCreator>().AsTransient();
-
-        //Container.Bind<CommandCreatorBase<IMoveCommand>>()
-        //    .To<MoveCommandCreator>().AsTransient();
-
-        //Container.Bind<CommandCreatorBase<IPatrolCommand>>()
-        //    .To<PatrolCommandCreator>().AsTransient();
-
-        //Container.Bind<CommandCreatorBase<IStopCommand>>()
-        //    .To<StopCommandCreator>().AsTransient();
-
         Container.Bind<CommandButtonsModel>().AsTransient();
 
 
