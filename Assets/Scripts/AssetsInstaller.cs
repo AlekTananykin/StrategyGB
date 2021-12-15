@@ -26,5 +26,8 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
 
         Container.Bind<IObservable<ISelectable>>()
             .FromInstance(_selectables);
+
+        Container.Bind<IObservable<Vector3>>()
+            .FromInstance(_groundClicksRMB);
     }
 }
