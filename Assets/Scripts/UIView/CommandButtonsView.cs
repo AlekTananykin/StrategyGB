@@ -15,6 +15,7 @@ public class CommandButtonsView : MonoBehaviour
     [SerializeField] private GameObject _stopButton;
     [SerializeField] private GameObject _produceUnitButton;
     [SerializeField] private GameObject _setRellyButton;
+    [SerializeField] private GameObject _produceSpitter;
 
     private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -44,6 +45,7 @@ public class CommandButtonsView : MonoBehaviour
         _stopButton.GetComponent<Selectable>().interactable = value;
         _produceUnitButton.GetComponent<Selectable>().interactable = value;
         _setRellyButton.GetComponent<Selectable>().interactable = value;
+        _produceSpitter.GetComponent<Selectable>().interactable = value;
     }
 
     private void Start()
@@ -59,6 +61,8 @@ public class CommandButtonsView : MonoBehaviour
         .Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
         _buttonsByExecutorType
         .Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
+        _buttonsByExecutorType
+        .Add(typeof(CommandExecutorBase<IProduceSpitterCommand>), _produceSpitter);
         _buttonsByExecutorType
          .Add(typeof(CommandExecutorBase<ISetRallyPointCommand>), _setRellyButton);
         Clear();

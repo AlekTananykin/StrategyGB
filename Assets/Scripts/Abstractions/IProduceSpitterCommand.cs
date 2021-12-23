@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IProduceSpitterCommand : ICommand
+public interface IProduceSpitterCommand : ICommand
 {
     Object UnitPrefab { get; }
 }

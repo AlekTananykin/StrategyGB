@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using UniRx;
-public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, 
+
+public class SpitterMainBuilding : CommandExecutorBase<IProduceSpitterCommand>,
     ISelectable, IAttackable
 {
     public float Health => _health;
@@ -13,7 +13,7 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,
 
     public Transform PivotPoint => transform;
 
-    [SerializeField] 
+    [SerializeField]
     Transform _unitsParent;
     [SerializeField]
     private float _health = 1000;
@@ -25,29 +25,29 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,
     DiContainer _diContainer;
 
     [SerializeField] private Vector3 _rallyPoint;
-    public Vector3 RallyPoint 
-    { 
-        get { return _rallyPoint; } 
-        set { _rallyPoint = value; } 
+    public Vector3 RallyPoint
+    {
+        get { return _rallyPoint; }
+        set { _rallyPoint = value; }
     }
 
-    public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
+    public override async Task ExecuteSpecificCommand(IProduceSpitterCommand command)
     {
         var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position,
         Quaternion.identity, _unitsParent);
-        
+
         var factionMember = instance.GetComponent<FactionMember>();
         factionMember.SetFaction(GetComponent<FactionMember>().FactionId);
 
 
         var queue = instance.GetComponent<ICommandQueue>();
-        var mainBuilding = GetComponent<MainBuilding>();
+        var mainBuilding = GetComponent<SpitterMainBuilding>();
         queue.EnqueueCommand(new MoveCommand(mainBuilding.RallyPoint));
     }
 
     public void RecieveDamage(int amount)
     {
-        if( _health <= 0)
+        if (_health <= 0)
         {
             return;
         }

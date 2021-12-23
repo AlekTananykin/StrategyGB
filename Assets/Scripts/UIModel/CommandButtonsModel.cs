@@ -10,6 +10,8 @@ public class CommandButtonsModel
 
     [Inject]
     private CommandCreatorBase<IProduceUnitCommand> _unitProduce;
+    [Inject]
+    private CommandCreatorBase<IProduceSpitterCommand> _spitterProduce;
     [Inject] 
     private CommandCreatorBase<IAttackCommand> _attack;
     [Inject] 
@@ -34,6 +36,9 @@ public class CommandButtonsModel
 
         _unitProduce.ProcessCommandExecutor(commandExecutor, 
             command=> executeCommandWrapper(command, commandsQueue));
+
+        _spitterProduce.ProcessCommandExecutor(commandExecutor,
+            command => executeCommandWrapper(command, commandsQueue));
 
         _attack.ProcessCommandExecutor(commandExecutor,
             command => executeCommandWrapper(command, commandsQueue));

@@ -19,6 +19,9 @@ public class UiModelInstaller: MonoInstaller
         Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
             .To<ProduceUnitCommandCreator>().AsTransient();
 
+        Container.Bind<CommandCreatorBase<IProduceSpitterCommand>>()
+            .To<ProduceSpitterCommandCreator>().AsTransient();
+
         Container.Bind<CommandCreatorBase<IAttackCommand>>()
             .To<AttackCommandCreator>().AsTransient();
 
